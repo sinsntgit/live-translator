@@ -1,0 +1,22 @@
+{
+  "name": "live-translation-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Real-time Arabic to English meeting translator (Electron client + Node backend relay to Soniox).",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/client"
+  ],
+  "scripts": {
+    "build": "npm run build -w packages/shared && npm run build -w packages/server && npm run build -w packages/client",
+    "typecheck": "npm run typecheck -w packages/shared && npm run typecheck -w packages/server && npm run typecheck -w packages/client",
+    "dev:server": "npm run dev -w packages/server",
+    "dev:client": "npm run dev -w packages/client",
+    "electron": "npm run electron -w packages/client",
+    "package": "npm run build -w packages/shared && npm run bundle -w packages/server && npm run package -w packages/client"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

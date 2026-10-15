@@ -1,0 +1,64 @@
+{
+  "name": "@live-translator/client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist-electron/main.mjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build && npm run build:electron",
+    "build:electron": "tsc -p electron/tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p electron/tsconfig.json --noEmit",
+    "electron": "npm run build:electron && electron .",
+    "electron:dev": "npm run build:electron && concurrently -k \"vite\" \"electron .\"",
+    "package": "npm run build && electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "@live-translator/shared": "^0.1.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "electron": "^31.3.0",
+    "electron-builder": "^24.13.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.4"
+  },
+  "build": {
+    "appId": "com.liveinterpret.app",
+    "productName": "LiveInterpret",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../server/dist-bundle/server.cjs",
+        "to": "server/server.cjs"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "LiveInterpret.${ext}"
+    },
+    "portable": {
+      "artifactName": "LiveInterpret.exe"
+    },
+    "electronVersion": "31.7.7"
+  },
+  "description": "Real-time Arabic/Thai to English meeting translator",
+  "author": "LiveInterpret"
+}
