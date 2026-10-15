@@ -1,4 +1,4 @@
-# Live Arabic → English Meeting Translator
+# Live Arabic → English / Thai -> English Meeting Translator
 
 Real implementation of the design handoff prototype (`Live Translator.dc.html`,
 `requirements.md`). See that handoff's README for full behavior spec — this
